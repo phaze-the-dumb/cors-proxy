@@ -40,7 +40,9 @@ export default {
 		proxyResHeaders["access-control-allow-headers"] = "*";
 		proxyResHeaders["access-control-allow-method"] = "*";
 
-		if(proxyHeaders["content-type"] && (proxyHeaders["content-type"].includes("image") || proxyHeaders["content-type"].includes("video"))){
+		let stream = url.searchParams.get('stream');
+
+		if(stream || (proxyHeaders["content-type"] && (proxyHeaders["content-type"].includes("image") || proxyHeaders["content-type"].includes("video")))){
 			let body = await proxy.arrayBuffer();
 
 			return new Response(body, { status: proxy.status, headers: proxyResHeaders });
