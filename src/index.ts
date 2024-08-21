@@ -19,6 +19,8 @@ export default {
 		})
 
 		proxyHeaders["host"] = urlHostname.host;
+		proxyHeaders["origin"] = urlHostname.hostname;
+		proxyHeaders["referer"] = urlHostname.hostname;
 
 		let proxy;
 
@@ -37,8 +39,11 @@ export default {
 		})
 
 		proxyResHeaders["access-control-allow-origin"] = request.headers.get("origin");
+
 		proxyResHeaders["access-control-allow-headers"] = "*";
 		proxyResHeaders["access-control-allow-method"] = "*";
+
+		console.log(proxyResHeaders);
 
 		let stream = url.searchParams.get('stream');
 
