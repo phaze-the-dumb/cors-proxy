@@ -42,7 +42,11 @@ export default {
 
 		let stream = url.searchParams.get('stream');
 
-		if(stream || (proxyHeaders["content-type"] && (proxyHeaders["content-type"].includes("image") || proxyHeaders["content-type"].includes("video")))){
+		if(stream){
+			let data: any = proxy.body!;
+
+			return new Response(data, { status: proxy.status, headers: proxyResHeaders });
+		} else if(proxyHeaders["content-type"] && (proxyHeaders["content-type"].includes("image") || proxyHeaders["content-type"].includes("video"))){
 			let body = await proxy.arrayBuffer();
 
 			return new Response(body, { status: proxy.status, headers: proxyResHeaders });
