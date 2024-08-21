@@ -22,6 +22,10 @@ export default {
 		proxyHeaders["origin"] = urlHostname.hostname;
 		proxyHeaders["referer"] = urlHostname.hostname;
 
+		proxyHeaders["sec-fetch-site"] = "none";
+		proxyHeaders["sec-fetch-mode"] = "navigate";
+		proxyHeaders["sec-fetch-dest"] = "document";
+
 		let proxy;
 
 		if(request.method === "PUT" || request.method === "POST"){
